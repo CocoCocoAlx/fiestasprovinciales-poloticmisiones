@@ -1,0 +1,90 @@
+<div class="container pt-3 my-auto" th:fragment="contenido">
+    <div class="col-12 col-lg-8 ">
+        <div class="card" style="border-radius: 1rem;">
+            <div class="card-body p-5">
+
+                <h1 class="mb-5 text-center">No dudes en ponerte en contacto con nosotros</h1>
+                <div class="container">
+                    <form id="contacto-form" class="row mt-3 g-3 needs-validation" action="" novalidate>
+
+                        <div class="form-box row">
+                            <div class="col-12 col-md-6 mb-4">
+                                <div id="" class="position-relative">
+                                    <label class="form-label" for="firstnameId">Nombre</label>
+                                    <input type="text" class="form-control" id="firstnameId" name="firstname"
+                                        minlength="3" maxlength="30" placeholder="Nombre" required />
+                                    <div class="valid-tooltip">
+                                        Todo bien!
+                                    </div>
+                                    <div class="invalid-tooltip">
+                                        Es necesario escribir su nombre.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 mb-4">
+                                <div id="" class="position-relative">
+                                    <label class="form-label" for="lastnameId">Apellido</label>
+                                    <input type="text" class="form-control" id="lastnameId" name="lastnameId"
+                                        minlength="2" maxlength="30" placeholder="Apellido" required />
+                                    <div class="valid-tooltip">
+                                        Todo bien!
+                                    </div>
+                                    <div class="invalid-tooltip">
+                                        Es necesario escribir su apellido.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 position-relative">
+                            <label class="form-label" for="emailId">Email</label>
+                            <input type="email" class="form-control" id="emailId" placeholder="email@email.com"
+                                required />
+                            <div class="valid-tooltip">
+                                Todo bien!
+                            </div>
+                            <div class="invalid-tooltip">
+                                Es necesario escribir su email. Ejemplo: email@email.com
+                            </div>
+
+                        </div>
+
+                        <div class="form-outline mb-4 position-relative">
+                            <label class="form-label" for="phoneNumberId">Número de Teléfono</label>
+                            <input type="number" class="form-control" id="phoneNumberId" minlength="7" maxlength="15"
+                                placeholder="Ejemplo: 5423335647645" />
+                            <div class="valid-tooltip">
+                                Sólo números. Ejemplo: 542233983767.
+                            </div>
+                        </div>
+
+                        <!-- Message input -->
+                        <div class="col-12 position-relative">
+                            <label class="form-label" for="messageInputId">Escribe aquí tu mensaje</label>
+                            <textarea class="form-control" id="messageInputId" minlength="5" rows="4"
+                                placeholder="Escribe aquí tu mensaje" required></textarea>
+                            <div class="valid-tooltip">
+                                Todo bien!
+                            </div>
+                            <div class="invalid-tooltip">
+                                Es necesario escribir un mensaje.
+                            </div>
+                        </div>
+
+
+                        <!-- Submit button -->
+
+
+                        <button id="submit" type="submit" class="btn btn-primary">Enviar</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>

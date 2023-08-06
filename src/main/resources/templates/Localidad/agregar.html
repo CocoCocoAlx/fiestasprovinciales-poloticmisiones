@@ -1,0 +1,43 @@
+<div class="container my-auto p-3" th:fragment="contenido">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Agregar Localidad
+                </div>
+                <form class="card-body" th:action="@{/localidades/agregar}" th:object="${localidad}" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" th:field="*{nombre}" th:errorClass="'is-invalid'">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="informacion" class="form-label">Información</label>
+                        <textarea class="form-control" id="informacion" th:field="*{informacion}" th:errorClass="'is-invalid'" rows="3"></textarea>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('informacion')}" th:errors="*{informacion}"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="distancia" class="form-label">Distancia (desde Posadas)</label>
+                        <input type="number" class="form-control" id="distancia" th:field="*{distancia}" th:errorClass="'is-invalid'">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('distancia')}" th:errors="*{distancia}"></div>
+                    </div>
+                    
+                        <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary mx-2">Guardar</button>
+                        <a href="/localidades" class="btn btn-secondary mx-2">Volver</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:fragment="script">
+    $(document).ready(function() {
+        $('.select2').select2({
+            placeholder: 'Seleccione una opción',
+            allowClear: true,
+            width: '100%',
+        });
+    });
+</script>

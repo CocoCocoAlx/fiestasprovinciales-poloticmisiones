@@ -1,0 +1,66 @@
+<div class="container p-3" th:fragment="contenido">
+    <div class="card p-4">
+        <div class="row">
+            <div th:if="${exito}" class="alert alert-success alert-dismissible fade show">
+                <span th:text="${exito}"></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div th:if="${error}" class="alert alert-danger alert-dismissible fade show">
+                <span th:text="${error}"></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col h2">Listado de artista</div>
+            <a href="/artista/agregar" class="col-auto btn btn-lg btn-success">
+                <i class="fa-solid fa-plus"></i>
+            </a>
+        </div>
+
+        <table id="artista" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Fechas de Presentacion</th>
+                    <th>Hora de Presentacion</th>
+                    <th>Enlace a web / FB / IG</th>
+                    <th>Foto</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="a : ${artista}">
+                    <td th:text="${a.nombre}"></td>
+                    <td th:text="${a.descripcion}"></td>
+                    <td th:text="'Del '+${#dates.format(a.fechaPresentacion, 'dd/MM/yyyy')}+' al '+${#dates.format(a.fechaPresentacion, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${a.horaPresentacion}"></td>
+                    <td style="text-align: center;"> <a class="fa fa-external-link" th:href="@{${a.enlace}}"></a></td>
+                    <td style="text-align: center;"><img th:src="${'/images/artista/' + a.foto}" height="150px"></td>
+                    <td>
+                        <a class="btn btn-primary" th:href="@{'/artista/{id}' (id=${a.id})}">
+                            <i class="fa-solid fa-eye"></i>
+                        </a>
+
+                        <a class="btn btn-secondary" th:href="@{'/artista/editar/{id}' (id=${a.id})}">
+                            <i class="fa-solid fa-pencil"></i>
+                        </a>
+
+                        <form class="d-inline" th:action="@{'/artista/{id}' (id=${a.id})}" th:method="DELETE">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro de eliminar?')">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script th:fragment="script">
+    $(document).ready(function() {
+        $('#artista').DataTable();
+    } );
+</script>

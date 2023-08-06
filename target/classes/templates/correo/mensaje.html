@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:remove="all">Plantilla para correo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    <p>
+        ¡Hola!</span>
+    </p>
+    <p>
+        Te enviamos los datos de la <b th:text="${fiesta}">Fiesta</b> que se realizará entre los días
+        <span style="font-weight:bold" th:text="${#dates.format(fechaInicio, 'dd/MM/yyyy')}">FechaInicio</span> y <span style="font-weight:bold" th:text="${#dates.format(fechaFin, 'dd/MM/yyyy')}">FechaFin</span> en <span style="font-weight:bold" th:text="${localidad}">Localidad</span>, a unos <span style="font-weight:bold" th:text="${distancia}">kilómetros</span> kilómetros desde Posadas.
+    </p>
+    <p>La misma se realizará en el predio <b th:text="${predio}">Predio</b> , ubicado en <b th:text="${predioUbicacion}">ubicación.</b>.</p>
+    <p>Para más información, te dejamos los enlaces al sitio web del evento y a una vista del mapa del predio donde se realiza: <b th:href="${fiestaEnlace}" th:text="${fiestaEnlace}"></b> y <b th:href="${predioEnlace}" th:text="${predioEnlace}"></b>.</p>
+    <p>
+        Saludos, <br />
+        <em>El equipo de Festividades Provinciales del Polo TIC@2022</em>
+    </p>
+</body>
+
+</html>

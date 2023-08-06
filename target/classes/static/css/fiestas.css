@@ -1,0 +1,80 @@
+/* Cambiar tipo de letra */
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+/* Cambiar el color de fondo a la barra */
+nav.navbar {
+    background-color: rgb(167, 167, 238);
+    text-align: center;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    min-height: 30px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+}
+
+/* Estilos de la lista de navegación */
+nav.navbar ul.nav {
+    padding-left: 0;
+    margin-bottom: -0.5em;
+    list-style: none;
+}
+
+nav.navbar ul.nav li {
+    display: inline-block;
+    font-size: 20px;
+    margin: 0.6em;
+}
+
+nav.navbar ul.nav li a {
+    color: #1f2020;
+    text-decoration: none;
+}
+
+/* Estilos de la imagen en la barra de navegación */
+img.img_nav {
+    max-width: 40px;
+    vertical-align: middle;
+    margin-right: 0.5em;
+}
+
+/* Estilos para el contenido */
+#content {
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* Estilos para enlaces */
+a {
+    color: #1f2020;
+    text-decoration: none;
+    font-size: larger;
+}
+
+/* Fondo del cuerpo */
+body {
+    background-image: url("/images/fondos/fondo.jpg");
+    background-size: cover;
+    min-height: 100vh;
+}
+
+/* Estilos de vistas */
+@media (min-width: 576px) {
+    .card-columns {
+        column-count: 2;
+    }
+}
+
+@media (min-width: 768px) {
+    .card-columns {
+        column-count: 3;
+    }
+}
+
+@media (min-width: 992px) {
+    .card-columns {
+        column-count: 4;
+    }
+}

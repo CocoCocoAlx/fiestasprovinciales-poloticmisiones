@@ -1,0 +1,53 @@
+<div class="container my-auto p-3" th:fragment="contenido">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header h3" th:text="${fiesta.nombre}"></div>
+                <div class="card-body">
+                    <p>
+                        <span class="fw-bold">Descripción:</span>
+                        <span th:text="${fiesta.descripcion}"></span>
+                    </p>
+                    <p>
+                        <span class="fw-bold">Fecha de inicio:</span>
+                        <span th:text="${#dates.format(fiesta.fechaInicio, 'dd/MM/yyyy')}"></span>
+                    </p>
+                    <p>
+                        <span class="fw-bold">Fecha de finalización:</span>
+                        <span th:text="${#dates.format(fiesta.fechaFin, 'dd/MM/yyyy')}"></span>
+                    </p>
+                    <p>
+                        <span class="fw-bold">Enlace:</span>
+                        <a th:href="@{${fiesta.enlace}}" th:text="${fiesta.enlace}" target="_blank" th:style="'color: blue; font-size: 16px;'"></a>
+                    </p>
+                    <div class="mb-3" th:if="${fiesta.foto != null}">
+                        <img th:src="${'/images/fiestas/' + fiesta.foto}" height="150px">
+                    </div>
+                    <p>
+                        <span class="fw-bold">Predio:</span>
+                        <span th:text="${fiesta.predio.nombre}"></span>
+                    </p>
+                    <p>
+                        <span class="fw-bold">Ver en el mapa:</span>
+                        <a th:href="@{${fiesta.predio.ubicacionUrl}}" th:text="${fiesta.predio.ubicacionUrl}" target="_blank" th:style="'color: blue; font-size: 16px;'"></a>
+                    </p>
+                    <p>
+                        <span class="fw-bold">Localidad: </span><span class="fw-bold" th:text="${fiesta.localidad.nombre+' (a  aprox. '}">Localidad:</span><span th:text="${fiesta.localidad.distancia+' km desde Posadas)'}">Distancia</span>
+                    </p>
+                    <p>
+                    <form th:action="@{'/fiestas/enviarcorreo/{id}' (id=${fiesta.id})}" th:object="${fiesta}"
+                        method="POST">
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-danger" onclick="enviarcorreo()">Enviar por
+                                correo</button>
+                        </div>
+                    </form>
+                    </p>
+                    <div class="d-flex justify-content-center">
+                        <a href="/fiestas" class="btn btn-secondary mx-2">Volver</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script th:fragment="script"></script>

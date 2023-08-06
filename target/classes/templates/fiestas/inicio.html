@@ -1,0 +1,66 @@
+<div class="container p-3" th:fragment="contenido">
+    <div class="card p-4">
+        <div class="row">
+            <div th:if="${exito}" class="alert alert-success alert-dismissible fade show">
+                <span th:text="${exito}"></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div th:if="${error}" class="alert alert-danger alert-dismissible fade show">
+                <span th:text="${error}"></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col h2">Listado de Festividades</div>
+            <a sec:authorize="hasRole('ROLE_Administrador')" href="/fiestas/agregar" class="col-auto btn btn-lg btn-success">
+                <i class="fa-solid fa-plus"></i>
+            </a>
+        </div>
+
+        <table id="fiestas" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Fechas de realización</th>
+                    <th>Enlace a web / FB / IG</th>
+                    <th>Fotos</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="f : ${fiestas}">
+                    <td th:text="${f.nombre}"></td>
+                    <td th:text="'Del '+${#dates.format(f.fechaInicio, 'dd/MM/yyyy')}+' al '+${#dates.format(f.fechaFin, 'dd/MM/yyyy')}"></td>
+                    <td style="text-align: center;"> <a class="fa fa-external-link" th:href="${f.enlace}" target="_blank"></a></td>
+                    <td style="text-align: center;"><img th:src="${'/images/fiestas/' + f.foto}" style="display:block;" width="60%" height="60%" ></td>
+                    <td>
+                        <a class="btn btn-primary" sec:authorize="hasAnyRole('ROLE_Administrador','ROLE_Usuario')" th:href="@{'/fiestas/{id}' (id=${f.id})}">
+                            <i class="fa-solid fa-eye" title="Ver"></i>
+                        </a>
+
+                        <a sec:authorize="hasRole('ROLE_Administrador')" class="btn btn-secondary" th:href="@{'/fiestas/editar/{id}' (id=${f.id})}">
+                            <i class="fa-solid fa-pencil" title="Editar"></i>
+                        </a>
+
+                        <form sec:authorize="hasRole('ROLE_Administrador')" class="d-inline" th:action="@{'/fiestas/{id}' (id=${f.id})}" th:method="DELETE">
+                            <button type="submit" class="btn btn-danger" title="Borrar" onclick="return confirm('¿Seguro de eliminar?')">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script th:fragment="script">
+    $(document).ready(function() {
+        $('#fiestas').DataTable({
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-MX.json' // URL del archivo de idioma
+            }
+    });
+    } );
+</script>

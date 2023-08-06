@@ -1,0 +1,68 @@
+<div class="container my-auto p-3" th:fragment="contenido">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Editar Artista
+                </div>
+                <form class="card-body" th:action="@{'/artista/editar/{id}' (id=${arista.id})}" th:object="${artista}" method="PUT" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" th:field="*{nombre}" th:errorClass="'is-invalid'">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <textarea class="form-control" id="descripcion" th:field="*{descripcion}" th:errorClass="'is-invalid'" rows="3"></textarea>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fechaPresentacion" class="form-label">Fecha de Presentacion</label>
+                        <input type="date" class="form-control" id="fechapresentacion" th:field="*{fechaPresentacion}" th:errorClass="'is-invalid'">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('fechaPresenracion')}" th:errors="*{fechaPresentacion}"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="hora" class="form-label">Hora</label>
+                        <input type="time" class="form-control" id="hora" th:field="*{hora}" th:errorClass="'is-invalid'">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('hora')}" th:errors="*{hora}"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="enlace" class="form-label">Enlace a página web / Página en RRSS</label>
+                        <input type="text" class="form-control" id="enlace" th:field="*{enlace}" th:errorClass="'is-invalid'">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('enlace')}" th:errors="*{enlace}"></div>
+                    </div>
+                    <div class="mb-3" th:if="${artista.foto != null}">
+                        <label>Foto actual</label>
+                        <img th:src="${'/images/artista/' + artista.foto}" height="100px">
+                    </div>
+                    <div class="mb-3">
+                        <label for="archivo" class="form-label">Foto</label>
+                        <input class="form-control" type="file" id="archivo" name="archivo" accept="image/*">
+                    </div>
+                    <!--<div class="mb-3">
+                        <label for="predio" class="form-label">Predio donde se realiza</label>
+                        <select id="predio" th:field="*{predio}" class="select2 form-select" th:errorClass="'is-invalid'">
+                            <option selected value=""></option>
+                            <option th:each="p : ${predio}" th:value="${p.id}" th:text="${p.nombre}"></option>
+                        </select>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('predio')}" th:errors="*{predio}"></div>
+                    </div>-->
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary mx-2">Editar</button>
+                        <a href="/artista" class="btn btn-secondary mx-2">Volver</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:fragment="script">
+    $(document).ready(function() {
+        $('.select2').select2({
+            placeholder: 'Seleccione una opción',
+            allowClear: true,
+            width: '100%',
+        });
+    });
+</script>

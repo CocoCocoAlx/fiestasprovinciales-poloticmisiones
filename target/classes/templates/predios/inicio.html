@@ -1,0 +1,62 @@
+<div class="container p-3" th:fragment="contenido">
+    <div class="card p-4">
+        <div class="row">
+            <div th:if="${exito}" class="alert alert-success alert-dismissible fade show">
+                <span th:text="${exito}"></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div th:if="${error}" class="alert alert-danger alert-dismissible fade show">
+                <span th:text="${error}"></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col h2">Listado de Predios</div>
+            <a sec:authorize="hasRole('ROLE_Administrador')" href="/predios/agregar" class="col-auto btn btn-lg btn-success">
+                <i class="fa-solid fa-plus"></i>
+            </a>
+        </div>
+
+        <table id="predio" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Capacidad</th>
+                    <th>Ubicación</th>
+                    <th>Ver en el mapa</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="p : ${predios}">
+                    <td th:text="${p.nombre}"></td>
+                    <td th:text="${p.capacidad}"></td>
+                    <td th:text="${p.ubicacion}"></td>
+                    <td style="text-align: center;"> <a class="fa fa-external-link" th:href="${p.ubicacionUrl}" target="_blank"></a></td>
+                    <td>
+                        <a sec:authorize="hasRole('ROLE_Administrador')" class="btn btn-secondary" th:href="@{'/predios/editar/{id}' (id=${p.id})}">
+                            <i class="fa-solid fa-pencil" title="Editar"></i>
+                        </a>
+
+                        <form sec:authorize="hasRole('ROLE_Administrador')" class="d-inline" th:action="@{'/predios/{id}' (id=${p.id})}" th:method="DELETE">
+                            <button type="submit" class="btn btn-danger" title="Borrar" onclick="return confirm('¿Seguro de eliminar?')">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script th:fragment="script">
+    $(document).ready(function() {
+        $('#predio').DataTable({
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-MX.json' // URL del archivo de idioma
+            }
+    });
+    } );
+</script>
